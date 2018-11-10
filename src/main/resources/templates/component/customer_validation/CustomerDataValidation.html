@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+	<title>Layout</title>
+</head>
+
+<body>
+	<!-- Content -->
+	<div class="container-fluid" layout:fragment="content">
+
+		<section class="login-form">
+			<div class="container">
+				<div class="card card-container">
+
+					<section class="login-form">
+
+						<div class="container">
+
+							<form action="#" th:action="@{/app/ValidateDocument}" th:object="${data}" method="post">
+
+								<h5 for="usr" class="labelManual">Product</h5>
+								<br />
+
+								<select name="product_id" id="product" class="select2_single form-control">
+									<option th:each="objx : ${products}" th:value="${objx.id}" th:utext="${objx.name}" />
+								</select>
+
+
+								<a class="btn btn-lg btn-primary btn-block btn-signin" th:href="@{/app/ValidateDocument}" role="button">Start to validate >></a>
+
+								<!-- 
+								<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Start to validate >></button>
+								 -->
+							</form>
+
+						</div>
+						<!-- /container -->
+					</section>
+
+
+				</div>
+				<!-- /card-container -->
+			</div>
+			<!-- /container -->
+		</section>
+		<!--/login-form-->
+
+	</div>
+	<!--End container-fluid-->
+</body>
+
+</html>

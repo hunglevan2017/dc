@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+    <title>Layout</title>
+</head>
+
+<body>
+    <!-- Content -->
+    <div class="container-fluid" layout:fragment="content">
+       
+    <h4 style="border-bottom: double;"><i class="mdi mdi-eye mdi-32px"></i> Monitoring</h4>
+    <div class="row">
+      <div class="col-12">
+
+        <a th:href="@{/app/CustomerDataMonitoring}" class="btn btn-primary btn-lg btn3d square">
+          <br />
+          <span><br />Customer Data <br /> Monitoring</span>
+        </a>
+
+
+        <a th:href="@{/app/DcMonitoring}" class="btn btn-primary btn-lg btn3d square disabled">
+          <br />
+          <span><br />DC <br /> Monitoring</span>
+        </a>
+
+
+        <a href="#" class="btn btn-primary btn-lg btn3d square disabled">
+          <br />
+          <span><br />Send Message <br /> To DC</span>
+        </a>
+
+
+        <a href="#" class="btn btn-primary btn-lg btn3d square disabled">
+          <br />
+          <span><br />Notice <br /> Board</span>
+        </a>
+
+
+      </div>
+    </div>
+
+    <br />
+
+
+    <h4 style="border-bottom: double;"><i class="mdi mdi-gesture-tap mdi-36px"></i> Processing</h4>
+    <div class="row">
+      <div class="col-12">
+
+        <a  th:href="@{/app/ManualAllocate}" class="btn btn-primary btn-lg btn3d square">
+          <br />
+          <span><br />Manual <br /> Allocation</span>
+        </a>
+
+        <a th:href="@{/app/CustomerDataValidation}" class="btn btn-primary btn-lg btn3d square">
+          <br />
+          <span><br />Customer Data <br /> Validation</span>
+        </a>
+
+
+
+      </div>
+    </div>
+
+    <br />
+    <h4 style="border-bottom: double;"><i class="mdi mdi-chart-areaspline mdi-32px"></i>  Report</h4>
+    <div class="row">
+      <div class="col-12">
+
+        <a href="#" class="btn btn-primary btn-lg btn3d square disabled">
+          <br />
+          <span><br />Appointment <br /> Report</span>
+        </a>
+
+        <a href="#" class="btn btn-primary btn-lg btn3d square disabled">
+          <br />
+          <span><br />Defer <br /> Report</span>
+        </a>
+
+        <a href="#" class="btn btn-primary btn-lg btn3d square disabled">
+          <br />
+          <span><br />Customer Data <br /> Report</span>
+        </a>
+
+      </div>
+    </div>
+
+    <br />
+    
+    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_SUBADMIN')">
+	    <h4 style="border-bottom: double;"> <i class="mdi mdi-account-multiple mdi-32px"></i> Management</h4>
+	    <div class="row">
+	      <div class="col-12">
+	
+	        <a href="#" class="btn btn-primary btn-lg btn3d square disabled">
+	          <br />
+	          <span><br />DC Team <br /> Management</span>
+	        </a>
+	
+	        <a href="#" class="btn btn-primary btn-lg btn3d square disabled">
+	          <br />
+	          <span><br />DC Areas <br /> Management</span>
+	        </a>
+	
+	      </div>
+	    </div>
+	</div>
+
+    <br />
+    
+    <div sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_SUBADMIN')">
+    
+	    <h4 style="border-bottom: double;"> <i class="mdi mdi-account-settings-variant mdi-32px"></i> Administration </h4>
+	    
+	    <div class="row">
+	      <div class="col-12">
+	
+	        <a href="#" class="btn btn-primary btn-lg btn3d square disabled">
+	          <br />
+	          <span><br />User <br /> Management</span>
+	        </a>
+	
+	        <a th:href="@{/role/index}" class="btn btn-primary btn-lg btn3d square">
+	          <br />
+	          <span><br />Role <br /> Management</span>
+	        </a>
+	
+	      </div>
+	    </div>
+    
+    </div>
+    
+    
+    </div>  <!--End container-fluid-->
+</body>
+
+</html>

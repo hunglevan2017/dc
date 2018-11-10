@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head th:replace="fragments/header :: header">
+<title>Header</title>
+</head>
+
+	<body>
+	
+
+	
+	 <input type="hidden" id="PageContext" name="PageContext" th:value="@{/}">
+
+	 	<div id="modal-confirm" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" style="padding:0px"></div>
+	<!-- Modal Success-->
+	<div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog panel ">
+			<div class="modal-content panel-primary">
+				<div class="modal-header panel-heading">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Hệ thống</h4>
+				</div>
+				<div class="modal-body" id="modalBodySuccess">Lưu dữ liệu thành công</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Đóng
+						(ESC)</button>
+	
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+		
+		
+		<div id="wrapper">
+		<div id="TemplateDialog1" class="modal fade" data-backdrop="static" role="dialog" ></div>
+		  
+		
+		
+			<div th:replace="fragments/navigation :: navigation"></div>
+			<div  id="page-wrapper">
+					<div layout:fragment="content"></div>
+			</div>
+		</div>
+		
+		
+		<!-- 
+		<div th:replace="fragments/footer :: footer"></div>
+		 -->
+	
+			
+	</body>
+
+</html>

@@ -1,0 +1,208 @@
+
+
+<!-- Modal edit-->
+
+<div class="modal-dialog">
+   
+    <form th:action="@{/user/add/}" method="POST" class="form-horizontal" id="form">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD User</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label required" for="cc_code">Sale Code </label>
+                    <div class="col-sm-6">
+
+                        <input  name="cc_code" id="cc_code" class="form-control " required="required" oninvalid="this.setCustomValidity( #{validate_data_empty} )" />
+
+                    </div>
+                </div><!--form-group-->
+                
+                
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="channel">Channel</label>
+                    <div class="col-sm-6">
+
+                        <select  class="form-control required" id="channel" name="channel">
+                                    <option th:each="obj : ${channels}"
+                           			 th:value="${obj.value_en}"
+                            		 th:utext="${obj.value_vn}"/>
+                            
+                        </select>
+
+
+
+                    </div>
+                </div><!--form-group-->
+                
+                
+                
+    
+                
+                                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="province">Province</label>
+                    <div class="col-sm-6">
+
+                        <input  name="province" id="province" class="form-control" />
+
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="pos_code">Pos Code</label>
+                    <div class="col-sm-6">
+                        <input  name="pos_code" id="pos_code" class="form-control" />
+                    </div>
+                </div><!--form-group-->
+                
+                 <div class="form-group">
+                    <label class="col-sm-4 control-label" for="pos_code">Pos Name</label>
+                    <div class="col-sm-6">
+                        <input  name="pos_code" id="pos_code" class="form-control" />
+                    </div>
+                </div><!--form-group-->
+                
+                                <div class="form-group">
+                    <label class="col-sm-4 control-label required" for="cc_name">CC Name</label>
+                    <div class="col-sm-6">
+
+                        <input  name="cc_name" id="cc_name" class="form-control" required="required" oninvalid="this.setCustomValidity( #{validate_data_empty} )"/>
+
+                    </div>
+                </div><!--form-group-->
+                            
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Sale Role</label>
+                    <div class="col-sm-6">
+
+                        <select  class="form-control aA" id="cc_role" name="cc_role" >
+                   
+                                     <option th:each="obj : ${roles}"
+                           			 th:value="${obj.value_en}"
+                            		 th:utext="${obj.value_vn}"/>
+                            		 
+                            		 <option  th:if="${session.loginInfo.role != 'teamleader'}" value="supervisor">supervisor</option>
+     
+                  
+                        </select>
+
+                    </div>
+                </div><!--form-group-->
+                
+                
+                 <div class="form-group">
+                    <label class="col-sm-4 control-label required" for="cc_code">Supervisor/TL</label>
+                    <div class="col-sm-6">
+
+                    
+                        <input  class="form-control required easyui-combobox"  id="parent_id"  name="parent_id" >
+                        
+               
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="is_android">Moblie App</label>
+                    
+                     <div class="col-sm-6">
+
+                       <input style="margin: 10px 0 0;transform: scale(1.5);" type="checkbox" id="is_android" name="is_android" value="1"  />  
+                    </div>
+                </div><!--form-group-->
+                
+         
+                
+                
+            </div><!--modal-body-->
+
+            <div class="modal-footer">
+                <button id="save" type="button" class="btn btn-success"><i
+                        class="mdi mdi-check mdi-17px"></i> Save
+                </button>
+                
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="mdi mdi-close mdi-17px"></i> Cancel
+                </button>
+            </div><!--modal-footer-->
+        </div><!--model-content-->
+    </form>
+    <script >
+
+    
+	//var formData1 = JSON.stringify( $("#form").serializeArray() );
+
+
+	//console.log(formData1);
+    
+	$( document ).ready(function() {
+		
+		
+		$('#parent_id').combobox({
+		    url: $('#PageContext').val() + 'getParentChannel', 
+		    valueField:'id',
+		    textField:'parent_channel'
+		});
+		
+		
+		$( "#save" ).click(function() {
+				
+				if( $('#cc_code').val() === "" || $('#cc_name').val() === "" || $('#parent_id').val() === "")
+				{
+					
+					alert("Please fill data");
+					
+					if( $('#parent_id').val() === "" )
+						$('#parent_id').focus();
+					
+					if( $('#cc_name').val() === "" )
+						$('#cc_name').focus();
+					
+					if( $('#cc_code').val() === "" )
+						$('#cc_code').focus();
+		
+				}
+				else
+				{
+			        //your form execution code
+					var formData = trimObj( ConvertFormToJSON($("#form")) );
+					console.log(formData);
+					      $.ajax({
+			                  type: "POST",
+			                  contentType : 'application/json; charset=utf-8',
+			                  data: JSON.stringify(formData),
+			                  url: $('#PageContext').val()+ "user/add/",
+			                  success: function(msg){
+			                  
+			         				alert(msg.result);
+			         				location.reload();
+			                  	//$('#modalBodySuccess').html( msg.status );
+									//$('#modalSuccess').modal('show');	
+			              		$('#cusloading').hide();
+			              		
+			                  },
+			                  error : function(xhr, ajaxOptions,
+			                                   thrownError) {
+			                  	alert("có lỗi xảy ra");
+			                  	$('#cusloading').hide();
+			               	    console.log(xhr.status);
+			                      console.log(thrownError);
+			                  }
+			                  //
+			              });
+				}
+			
+		});
+	});
+	
+	
+	
+	
+</script>
+</div>
+

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+  <title>Layout</title>
+</head>
+
+<body>
+  <!-- Content -->
+  <div class="container-fluid" layout:fragment="content">
+  
+  	    	<script th:src="@{/js/jquery.easyui.min.js}"></script>
+	<link th:href="@{/css/easyui/easyui.css}" rel="stylesheet">
+    <link th:href="@{/css/easyui/icon.css}" rel="stylesheet">
+    <link th:href="@{/css/easyui/demo.css}" rel="stylesheet">
+
+    <h4 style="border-bottom: double;"></i> Manual Allocation</h4>
+    <form id="frmFilter">
+
+      <!-- Row 1 -->
+      <div class="row">
+
+        <div class="col-2">
+          <label for="usr" class="labelManual">Cust. Name</label>
+          <input type="text" class="form-control" id="" name="">
+        </div>
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">Status</label>
+          <select class="form-control" id="" name="">
+          </select>
+
+        </div>
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">TSA Campain</label>
+          <input type="text" class="form-control" id="" name="">
+
+        </div>
+
+        <div class="col-3">
+
+          <label for="usr" class="labelManual">Appointment Date</label>
+          <input type="text" class="form-control" id="" name="">
+
+        </div>
+      </div>
+
+
+      <!-- Row 2 -->
+      <div class="row">
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">Cust. ID No</label>
+          <input type="text" class="form-control" id="" name="">
+        </div>
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">Product</label>
+          
+                      <input  class="form-control required easyui-combobox"  id="product"  name="product" >
+					<script>
+					$('#product').combobox({
+		    		    url: $('#PageContext').val() + 'app/getProducts', 
+		    		    valueField:'id',
+		    		    textField:'name'
+		    		});		         
+					</script>
+						          
+          
+      
+
+        </div>
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">TSA Group</label>
+          <input type="text" class="form-control" id="" name="">
+
+        </div>
+
+        <div class="col-3">
+
+          <label for="usr" class="labelManual">Allocate Date</label>
+          <input type="text" class="form-control" id="" name="">
+
+        </div>
+      </div>
+
+
+
+      <!-- Row 3 -->
+      <div class="row">
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">Appt. Province/City</label>
+          <input type="text" class="form-control" id="" name="">
+        </div>
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">DC In Charge</label>
+          <select class="form-control" id="" name="">
+          </select>
+
+        </div>
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">TSA Team</label>
+          <input type="text" class="form-control" id="" name="">
+
+        </div>
+
+        <div class="col-3">
+
+          <label for="usr" class="labelManual">Date of Lead</label>
+          <input type="text" class="form-control" id="" name="">
+
+        </div>
+      </div>
+
+
+      <!-- Row 4 -->
+      <div class="row">
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">Appt. District/Town</label>
+          <input type="text" class="form-control" id="" name="">
+        </div>
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">TSA in Charge</label>
+          <select class="form-control" id="" name="">
+          </select>
+
+        </div>
+
+        <div class="col-2">
+
+          <label for="usr" class="labelManual">Route</label>
+          <select class="form-control" id="" name="">
+          </select>
+
+
+        </div>
+
+        <div class="col-3">
+          <br />
+          <button id="search" type="button" class="btn btn-primary btn3d" style="margin-top:0px;width: 100%;">Search</button>
+
+
+
+        </div>
+
+      </div>
+
+       
+        
+      <div id="divdtTable">
+
+        <table class="table table-striped table-bordered table-hover" id="dtTable">
+          <thead>
+
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+
+      </div>
+
+      <script>
+
+        var table;
+        $("#search").click(function() {
+            $("#cusloading").show();
+        
+          $("#search").attr("disabled", true);
+          resetDivToDefault("divdtTable","dtTable");
+          
+          var condition = {
+            "start_time":  "2018/12/01 00:00:00",
+            "end_time": "2018/12/03 23:59:59",
+            "type_report": 5
+            
+          };
+	
+          //  "mData": "No\\.",
+          
+          var aoData = [{
+              "mData": "no",
+              "defaultContent": ""
+            },
+            {
+                "mData": null,
+                "defaultContent": ""
+            },
+          
+            {
+              "mData": "customer_name",
+              "defaultContent": ""
+            },
+            {
+              "mData": "current_address",
+              "defaultContent": ""
+            },
+            {
+              "mData": "dc_in_change",
+              "defaultContent": ""
+            },
+            {
+              "mData": "tsa",
+              "defaultContent": ""
+            },
+            {
+              "mData": "status",
+              "defaultContent": ""
+            },
+            {
+              "mData": "pending_tat",
+              "defaultContent": ""
+            },
+
+            {
+                "mData": "id",
+                "defaultContent": ""
+            }
+          ];
+          /* Begin Ajax */
+
+          /*
+          var title = ["No.", "Content", "PL Normal", "PL Mobile", " PL Pre", "CRC Pre", "QDE Normal", "QDE Mobile", "QDE PL Pre", "QDE CRC Pre"];
+          */
+
+          var columnDefs = [{
+	  			"title": "#",
+				"targets": 0,
+				"width":"2%",
+				"className": "text-center"
+            },
+            {
+                "targets": 1,
+                'checkboxes': {
+                    'selectRow': true
+                 }
+    
+            
+            },
+            {
+              "title": "Customer Name",
+              "targets": 2
+            },
+            {
+              "title": "Current Addr",
+              "targets": 3
+            },
+            {
+              "title": "DC In Charge",
+              "targets": 4
+            },    
+            {
+              "title": " TSA",
+              "targets": 5
+            },
+            {
+              "title": "Status",
+              "targets": 6
+            },
+            {
+              "title": "Pending TAT",
+              "targets": 7
+            },
+            {
+              "title": "id",
+              "targets": 8,
+              "visible": false,
+              "searchable": false
+            }
+          ];
+          
+      //	var token = $("meta[name='_csrf']").attr("content");
+     //  var header = $("meta[name='_csrf_header']").attr("content");
+
+          table = $('#dtTable').dataTable({
+            "ajax": {
+              "url": '[[@{/app/getContracts}]]',
+              "type": "POST",
+              "data": function(d) {
+                return JSON.stringify(condition);
+                
+                
+              },
+              "dataSrc": "",
+              "contentType": "application/json; charset=utf-8"
+            },
+            select: {
+                style: 'single'
+            },
+            "columnDefs": columnDefs,
+            "aoColumns": aoData,
+            "ordering": false,
+            "bPaginate": true,
+            "pageLength": 50,
+            "scrollX": true,
+            "scrollY": 450,
+            "initComplete": function(settings, json) {
+                $("#search").attr("disabled", false);
+              //$("#cusloading").hide();
+            },
+            dom: 'Bfrtip',
+            "autoWidth": false
+
+
+          }); /*End table*/
+
+        });
+        
+        $("#allocate").click(function() {
+        	var arrayObjectSelected = [];
+        	if(table!=null)
+        	{
+	        	var data = table.api().rows().nodes();
+	        	$.each(data, function (index, value) {
+	        	  //console.log($(this).find('input').prop('checked'));
+	        	  if($(this).find('input').prop('checked'))
+	        		  {
+	        		  console.log( table.api().row( index ).data() );
+	        	  	  arrayObjectSelected.push(table.api().row( index ).data());
+	        		  }
+	        	});	
+	        	
+	        	if(arrayObjectSelected.length > 0)
+	        	{
+		     		var mapForm = document.createElement("form");
+	          	    mapForm.target = "_blank";
+	          	    mapForm.method = "POST"; // or "post" if appropriate
+	          	    mapForm.action = '[[@{/app/AllocateToDC}]]';
+	          	    
+	          	    console.log(arrayObjectSelected);
+	
+	          	    var mapInput = document.createElement("input");
+	          	    mapInput.type = "text";
+	          	    mapInput.name = "data";
+	          	    mapInput.value = JSON.stringify( arrayObjectSelected );
+	          	    mapForm.appendChild(mapInput);
+	          	    
+	          	    
+	          	    document.body.appendChild(mapForm);
+	          	 	mapForm.submit();
+	        	}
+	        	else
+	        	{
+	        		alert("Please choose contract to allocate !! ");
+	        	}
+        	}
+        	else
+        	{
+        		alert("Please search data util allocate");
+        	}
+        	
+        });
+      </script>
+
+
+
+    </form>
+
+
+
+  </div>
+  <!--End container-fluid-->
+</body>
+
+</html>

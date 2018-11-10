@@ -1,0 +1,267 @@
+
+@import url(../component/login/login.css);
+
+
+/* Login */
+.login-register {
+    background: url(../images/login-register.jpg) no-repeat center center / cover !important;
+    height: 100%;
+    position: fixed;
+}
+.login-box {
+    height: 100%;
+    background: #ffffff;
+    position: absolute;
+    right: 0px;
+    width: 420px;
+}
+.login-box .footer {
+    width: 100%;
+    left: 0px;
+    right: 0px;
+}
+.login-box .social {
+    display: block;
+    margin-bottom: 30px;
+}
+#recoverform {
+    display: none;
+}
+
+.user-thumb img {
+    height: 88px;
+    margin: 0px auto;
+    width: 88px;
+}
+
+body { padding-top: 80px; }
+/*Logo Menu*/
+.top-left-part {
+    width: 220px;
+    float: left;
+    /*background: rgba(0, 0, 0, 0.5);*/
+    height: 50px;
+  }
+
+.top-left-part a {
+    color: #ffffff;
+    font-size: 18px;
+    line-height: 50px;
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+/*Margin Menu*/
+.navbar-nav > li{
+  margin-left:25px;
+  margin-right:25px;
+}
+
+/*Body*/
+.navbar-top-links > li > a {
+    color: #ffffff;
+    padding: 0 14px;
+    line-height: 50px;
+    min-height: 50px;
+}
+
+.square{
+  width: 130px;
+  height: 130px;
+  border-radius: 20px;
+  font-size: initial;
+  padding: .5rem 0rem;
+}
+
+.profile-pic {
+    padding: 0px 20px;
+    line-height: 50px;
+}
+.profile-pic img {
+    margin-right: 10px;
+}
+
+/*3D*/
+.btn3d {
+    position:relative;
+    top: -6px;
+    border:0;
+     transition: all 40ms linear;
+     margin-top:10px;
+     margin-bottom:10px;
+     margin-left:2px;
+     margin-right:2px;
+}
+.btn3d:active:focus,
+.btn3d:focus:hover,
+.btn3d:focus {
+    -moz-outline-style:none;
+         outline:medium none;
+}
+.btn3d:active, .btn3d.active {
+    top:2px;
+}
+.btn3d.btn-white {
+    color: #666666;
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.10) inset, 0 8px 0 0 #f5f5f5, 0 8px 8px 1px rgba(0,0,0,.2);
+    background-color:#fff;
+}
+.btn3d.btn-white:active, .btn3d.btn-white.active {
+    color: #666666;
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,.1);
+    background-color:#fff;
+}
+.btn3d.btn-default {
+    color: #666666;
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.10) inset, 0 8px 0 0 #BEBEBE, 0 8px 8px 1px rgba(0,0,0,.2);
+    background-color:#f9f9f9;
+}
+.btn3d.btn-default:active, .btn3d.btn-default.active {
+    color: #666666;
+    box-shadow:0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,.1);
+    background-color:#f9f9f9;
+}
+.btn3d.btn-primary {
+    box-shadow:0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #4D5BBE, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#4274D7;
+}
+.btn3d.btn-primary:active, .btn3d.btn-primary.active {
+    box-shadow:0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color:#4274D7;
+}
+.btn3d.btn-success {
+    box-shadow:0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #5eb924, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#78d739;
+}
+.btn3d.btn-success:active, .btn3d.btn-success.active {
+    box-shadow:0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #78d739;
+}
+.btn3d.btn-info {
+    box-shadow:0 0 0 1px #00a5c3 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #348FD2, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#39B3D7;
+}
+.btn3d.btn-info:active, .btn3d.btn-info.active {
+    box-shadow:0 0 0 1px #00a5c3 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #39B3D7;
+}
+.btn3d.btn-warning {
+    box-shadow:0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #D79A34, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#FEAF20;
+}
+.btn3d.btn-warning:active, .btn3d.btn-warning.active {
+    box-shadow:0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #FEAF20;
+}
+.btn3d.btn-danger {
+    box-shadow:0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #AA0000, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#D73814;
+}
+.btn3d.btn-danger:active, .btn3d.btn-danger.active {
+    box-shadow:0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #D73814;
+}
+.btn3d.btn-magick {
+    color: #fff;
+    box-shadow:0 0 0 1px #9a00cd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 8px 0 0 #9823d5, 0 8px 8px 1px rgba(0,0,0,0.5);
+    background-color:#bb39d7;
+}
+.btn3d.btn-magick:active, .btn3d.btn-magick.active {
+    box-shadow:0 0 0 1px #9a00cd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+    background-color: #bb39d7;
+}
+
+/*-------------*/
+
+.labelManual{
+	margin-bottom:0px;
+}
+
+/*Color header: green*/
+table.dataTable thead tr {
+  background-color: #28a745;
+  color: white;
+}
+
+
+.text-center{
+  text-align: center;
+}
+.card-img-top{
+  width: 100%;
+}
+/*Call to Action*/
+
+.header-line {
+  height: 3px;
+  width: 100%;
+  content: '';
+  display: block;
+}
+.gradient-color-1{
+     background: -webkit-linear-gradient(left,#fc636b 0,#ff6d92 60%,#fd9a00 100%);
+    background: linear-gradient(to right,#fc636b 0,#ff6d92 60%,#fd9a00 100%);
+}
+.gradient-color-2{
+    background: #3be8b0;
+    background: -webkit-linear-gradient(bottom left,#3be8b0 0,#02ceff 100%);
+    background: linear-gradient(to top right,#3be8b0 0,#02ceff 100%);
+}
+/**/
+/*Utility Class*/
+.text-white{
+  color: white;
+}
+.no-margin{
+  margin:0;
+}
+.no-margin-top{
+  margin-top:0;
+}
+.pad-right{
+  margin-right: 0.5em;
+}
+/**/    
+.dataTables_scrollBody {
+    border-bottom: 0px solid #111 !important;
+}
+
+
+
+input[type=checkbox] {
+    box-sizing: border-box;
+    padding: 0;
+    height: 20px;
+    width: 20px;
+}
+input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    height: 20px;
+    width: 20px;
+}
+.card {
+     border: 0px solid rgba(0,0,0,.125) !important; 
+}
+.haflBottomRem{
+	    margin-bottom: 0.5rem !important;
+}
+
+.scroll {
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.dataTables_filter {
+   /*float: left !important;*/
+}
+
+.modal-full{
+    max-width: 100% !important;
+        height: 100%!important;
+    margin: 0px;
+}
+.required:after {
+    color: red;
+    content: ' *';
+} 
+

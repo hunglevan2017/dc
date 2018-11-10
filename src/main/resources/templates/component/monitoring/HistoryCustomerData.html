@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+	<title>Layout</title>
+</head>
+
+<body>
+	<!-- Content -->
+	<div class="container-fluid" layout:fragment="content">
+
+
+		<div class="row"></div>
+
+		<div class="col-12">
+
+
+			<div class="card cta cta--featured">
+				<div class="card-block">
+					<h5 class="card-title no-margin-top" style="margin: 0px 5px 0px 5px;"><i class="mdi mdi-account-check mdi-32px"></i> DC Monitoring</h5>
+				</div>
+				<span class="header-line gradient-color-1"></span>
+				<div class="card-block" style="margin-top: 0.5%;">
+					<div class="input-group">
+
+
+
+
+						<div class="col-3">
+
+
+
+							<div class="input-group mb-3 haflBottomRem">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="inputGroup-sizing-default">DC Team</span>
+								</div>
+								<select class="form-control" id="" name="">
+								</select>
+
+							</div>
+							<br />
+
+							<table id="example" class="display" width="100%"></table>
+
+							<script>
+								var dataSet = [
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""],
+									["Đơn đề nghị vay vốn", ""]
+								];
+
+								$('#example').DataTable({
+									data: dataSet,
+									columns: [{
+											title: "DC Team(3)"
+										},
+										{
+											title: ""
+										}
+									],
+									"bInfo": false,
+									"bPaginate": false,
+									"searching": true,
+									"scrollY": "650px"
+								});
+							</script>
+
+
+						</div>
+
+						<div class="col-9">
+							<div id="tabs">
+								<ul>
+									<li><a href="#tabs-1">Customer Data</a></li>
+									<!-- 
+									<li><a href="#tabs-2">Proin dolor</a></li>
+									<li><a href="#tabs-3">Aenean lacinia</a></li>
+									 -->
+								</ul>
+								<div id="tabs-1">
+						
+									   
+							      <div id="divdtTable">
+							
+							        <table class="table table-striped table-bordered table-hover" id="dtTable">
+							          <thead>
+							
+							          </thead>
+							          <tbody>
+							          </tbody>
+							        </table>
+							
+							      </div>
+								</div>
+								<!-- 
+								<div id="tabs-2">
+									<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut
+										dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla.
+										Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+								</div>
+								<div id="tabs-3">
+									<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent
+										per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+									<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra
+										blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu
+										tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+								</div>
+								 -->
+							</div>
+						</div>
+						<script>
+							$(function() {
+								$("#tabs").tabs();
+							});
+							function LoadData()
+							{
+								 $("#search").attr("disabled", true);
+						          resetDivToDefault("divdtTable","dtTable");
+						          
+						          var condition = {
+						            "start_time":  "2018/12/01 00:00:00",
+						            "end_time": "2018/12/03 23:59:59",
+						            "type_report": 5
+						            
+						          };
+							
+						          //  "mData": "No\\.",
+						          
+						          var aoData = [{
+						              "mData": "no",
+						              "defaultContent": ""
+						            },
+						            {
+						                "mData": null,
+						                "defaultContent": ""
+						            },
+						          
+						            {
+						              "mData": "customer_name",
+						              "defaultContent": ""
+						            },
+						            {
+						              "mData": "current_address",
+						              "defaultContent": ""
+						            },
+						            {
+						              "mData": "dc_in_change",
+						              "defaultContent": ""
+						            },
+						            {
+						              "mData": "tsa",
+						              "defaultContent": ""
+						            },
+						            {
+						              "mData": "status",
+						              "defaultContent": ""
+						            },
+						            {
+						              "mData": "pending_tat",
+						              "defaultContent": ""
+						            },
+
+						            {
+						                "mData": "id",
+						                "defaultContent": ""
+						            }
+						          ];
+						          /* Begin Ajax */
+
+						          /*
+						          var title = ["No.", "Content", "PL Normal", "PL Mobile", " PL Pre", "CRC Pre", "QDE Normal", "QDE Mobile", "QDE PL Pre", "QDE CRC Pre"];
+						          */
+
+						          var columnDefs = [{
+							  			"title": "#",
+										"targets": 0,
+										"width":"2%",
+										"className": "text-center"
+						            },
+						            {
+						                "targets": 1,
+						                'checkboxes': {
+						                    'selectRow': true
+						                 }
+						    
+						            
+						            },
+						            {
+						              "title": "Customer Name",
+						              "targets": 2
+						            },
+						            {
+						              "title": "Current Addr",
+						              "targets": 3
+						            },
+						            {
+						              "title": "DC In Charge",
+						              "targets": 4
+						            },    
+						            {
+						              "title": " TSA",
+						              "targets": 5
+						            },
+						            {
+						              "title": "Status",
+						              "targets": 6
+						            },
+						            {
+						              "title": "Pending TAT",
+						              "targets": 7
+						            },
+						            {
+						              "title": "id",
+						              "targets": 8,
+						              "visible": false,
+						              "searchable": false
+						            }
+						          ];
+						          
+						      //	var token = $("meta[name='_csrf']").attr("content");
+						     //  var header = $("meta[name='_csrf_header']").attr("content");
+
+						          table = $('#dtTable').dataTable({
+						            "ajax": {
+						              "url": '[[@{/app/getContracts}]]',
+						              "type": "POST",
+						              "data": function(d) {
+						                return JSON.stringify(condition);
+						                
+						                
+						              },
+						              "dataSrc": "",
+						              "contentType": "application/json; charset=utf-8"
+						            },
+						            select: {
+						                style: 'single'
+						            },
+						            "columnDefs": columnDefs,
+						            "aoColumns": aoData,
+						            "ordering": false,
+						            "bPaginate": true,
+						            "pageLength": 50,
+						            "scrollX": true,
+						            "scrollY": 600,
+						            "initComplete": function(settings, json) {
+						                $("#search").attr("disabled", false);
+						              //$("#cusloading").hide();
+						            },
+						            dom: 'Bfrtip',
+						            "autoWidth": false
+
+
+						          }); /*End table*/
+							}
+							LoadData();
+						</script>
+
+
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+
+
+
+	</div>
+	<!--End container-fluid-->
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Header</title>
+</head>
+
+<body>
+
+<header>
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:fragment="navigation">
+
+
+    <div class="top-left-part">
+      <a class="logo" th:href="@{/homepage}">
+
+      
+                    <img class="logotog" th:src="@{/images/logo.png}"  width="180"
+                         alt="sbglogo"/>&nbsp;<span class="hidden-xs"></span>
+
+                    <img class="logotog" th:src="@{/images/logo-mini.png}" width="50"
+                         alt="sbglogo-mini" style="display: none"/>&nbsp;<span class="hidden-xs"></span>
+
+
+
+      </a>
+    </div>
+    <!--top-left-part-->
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+      
+      
+
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Management</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item disabled" href="#"><i class="mdi mdi-account-multiple mdi-18px"></i> DC Team</a>
+            <a class="dropdown-item disabled" href="#"><i class="mdi mdi-account-location mdi-18px"></i> DC Areas</a>
+          </div>
+        </li>
+
+
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Processing</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" th:href="@{/app/ManualAllocate}" ><i class="mdi mdi-gesture-tap mdi-24px"></i> Manual Allocation</a>
+            <a class="dropdown-item" th:href="@{/app/CustomerDataValidation}"><i class="mdi mdi-account-check mdi-24px"></i> Customer Data Validation</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Monitoring</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" th:href="@{/app/CustomerDataMonitoring}"><i class="mdi mdi-eye mdi-18px"></i> Customer Data Monitoring</a>
+            <a class="dropdown-item" th:href="@{/app/DcMonitoring}" ><i class="mdi mdi-monitor mdi-18px"></i> DC Monitoring</a>
+            <a class="dropdown-item disabled" href="#"><i class="mdi mdi-cellphone-text mdi-18px"></i> Send Message To DC</a>
+            <a class="dropdown-item disabled" href="#"><i class="mdi mdi-calendar-edit mdi-18px"></i>  Notice Board</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item disabled" href="#"><i class="mdi mdi-chevron-double-right mdi-18px"></i> Appointment Report</a>
+            <a class="dropdown-item disabled" href="#"><i class="mdi mdi-chevron-double-right mdi-18px"></i> Defer Report</a>
+            <a class="dropdown-item disabled" href="#"><i class="mdi mdi-chevron-double-right mdi-18px"></i> Customer Data Report</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item disabled" href="#"><i class="mdi mdi-account-settings-variant mdi-18px"></i> User Management</a>
+            <a class="dropdown-item" th:href="@{/role/index}"><i class="mdi mdi-account-card-details mdi-18px"></i> Role Management</a>
+
+          </div>
+        </li>
+        <!--
+          <li class="nav-item dropdown active">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Help</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="#"></a>
+            </div>
+          </li>
+        -->
+      </ul>
+      <ul class="nav navbar-top-links navbar-right pull-right">
+        <!--
+               <li class="dropdown">
+                   <a  data-toggle="dropdown" href="#">
+                       <i class="mdi mdi-bell-outline mdi-24px"></i>
+                       <span class="badge badge-xs badge-info"></span>
+                   </a>
+
+               </li>
+             -->
+        <li>
+
+          	<a style="color:white"  >
+
+          	<i class="mdi mdi-account mdi-24px"></i><span th:utext="${#request.userPrincipal.name}"></span>
+          	
+          	</a>
+            <a th:href="@{/logoutSuccessful}" ><i class="mdi mdi-logout mdi-24px"></i> </a> 
+ 
+        </li>
+        <!-- /.dropdown -->
+
+      </ul>
+
+    </div>
+  </nav>
+
+
+		 
+	
+</header>
+</body>
+
+</html>

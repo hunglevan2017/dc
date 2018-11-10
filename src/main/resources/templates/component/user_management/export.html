@@ -1,0 +1,105 @@
+
+
+<!-- Modal edit-->
+
+<div class="modal-dialog">
+   
+    <form th:action="@{/user/add/}" method="POST" class="form-horizontal" id="form">
+ 		<input type="hidden" id="cc_code" name="cc_code" th:value="${session.loginInfo.username}">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Change Password</h4>
+            </div>
+            <div class="modal-body">
+
+   
+                
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label" for="channel">Channel</label>
+                    <div class="col-sm-6">
+						 <input type="hidden" id="username" name="username" th:value="${session.loginInfo.username}">
+                        <select  class="form-control required" id="channel" name="channel">
+                                    <option th:each="objx : ${channels}"
+                           			 th:value="${objx.value_en}"
+                            		 th:utext="${objx.value_vn}"/>
+                            
+                        </select>
+
+
+
+                    </div>
+                </div><!--form-group-->
+                
+                
+
+            </div><!--modal-body-->
+
+            <div class="modal-footer">
+                <button id="save" type="button" class="btn btn-success"><i
+                        class="mdi mdi-check mdi-17px"></i> Save
+                </button>
+                
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="mdi mdi-close mdi-17px"></i> Cancel
+                </button>
+            </div><!--modal-footer-->
+        </div><!--model-content-->
+    </form>
+    <script >
+
+    
+	//var formData1 = JSON.stringify( $("#form").serializeArray() );
+
+
+	//console.log(formData1);
+    
+	$( document ).ready(function() {
+		
+		
+
+		
+		
+		$( "#save" ).click(function() {
+				
+			
+				
+			        //your form execution code
+					var formData = trimObj( ConvertFormToJSON($("#form")) );
+					console.log(formData);
+					      $.ajax({
+			                  type: "POST",
+			                  contentType : 'application/json; charset=utf-8',
+			                  data: JSON.stringify(formData),
+			                  url: $('#PageContext').val()+ "user/export/",
+			                  success: function(msg){
+			                  
+			         			//	alert(msg.result);
+			         			//	location.reload();
+			                  	//$('#modalBodySuccess').html( msg.status );
+									//$('#modalSuccess').modal('show');	
+			              		$('#cusloading').hide();
+			              		
+			                  },
+			                  error : function(xhr, ajaxOptions,
+			                                   thrownError) {
+			                  	alert("có lỗi xảy ra");
+			                  	$('#cusloading').hide();
+			               	    console.log(xhr.status);
+			                     console.log(thrownError);
+			                  }
+			                  //
+			              });
+				
+			
+		});
+	});
+	
+	
+	
+	
+</script>
+</div>
+

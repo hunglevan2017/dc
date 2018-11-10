@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+	<title>Layout</title>
+</head>
+
+<body>
+	<!-- Content -->
+	<div class="container-fluid" layout:fragment="content">
+
+	<script th:src="@{/js/jquery.easyui.min.js}"></script>
+    <link th:href="@{/css/easyui/easyui.css}" rel="stylesheet">
+    <link th:href="@{/css/easyui/icon.css}" rel="stylesheet">
+    <link th:href="@{/css/easyui/demo.css}" rel="stylesheet">
+
+		<div class="row"></div>
+
+		<div class="col-12">
+
+
+			<div class="card cta cta--featured">
+				<div class="card-block">
+					<h5 class="card-title no-margin-top" style="margin: 0px 5px 0px 5px;"><i class="mdi mdi-account-check mdi-32px"></i> Customer Data Validation</h5>
+				</div>
+				<span class="header-line gradient-color-1"></span>
+				<div class="card-block" style="margin-top: 0.5%;">
+					<div class="input-group">
+						<div class="col-7">
+							
+							<embed width="100%" height="800" name="plugin" id="plugin" th:src="@{/pdf/dn_or.pdf}" type="application/pdf" internalinstanceid="19"></embed>
+						
+						</div>
+						
+						
+						
+						<div class="col-4">
+							
+							<p class="haflBottomRem"> <strong>::: General Info</strong></p>
+          					
+          					<div class="input-group mb-3 haflBottomRem">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text" id="inputGroup-sizing-default">Cust. Name</span>
+							  </div>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+							</div>
+							
+							<div class="input-group mb-3 haflBottomRem">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text" id="inputGroup-sizing-default">Cust.ID No&nbsp;</span>
+							  </div>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+							</div>
+							
+							<div class="input-group mb-3 haflBottomRem">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text" id="inputGroup-sizing-default">Product &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							  </div>
+							  <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+							</div>
+							
+							<p class="haflBottomRem"> <strong>::: (DC) Document Collected</strong></p>
+							
+							<table id="example" class="display" width="100%"></table>
+							
+							<script>
+							
+							var dataSet = [
+							    [ "1", "Đơn đề nghị vay vốn", "Đơn đề nghị vay vốn" ],
+							    [ "2", "Chứng minh nhân dân", "Chứng minh nhân dân" ],
+							    [ "3", "Hộ khẩu", "Hộ khẩu"],
+							    [ "4", "", "Hợp đồng lao động"],
+							    [ "1", "Đơn đề nghị vay vốn", "Đơn đề nghị vay vốn" ],
+							    [ "2", "Chứng minh nhân dân", "Chứng minh nhân dân" ],
+							    [ "3", "Hộ khẩu", "Hộ khẩu"],
+							    [ "4", "", "Hợp đồng lao động"],
+							    [ "1", "Đơn đề nghị vay vốn", "Đơn đề nghị vay vốn" ],
+							    [ "2", "Chứng minh nhân dân", "Chứng minh nhân dân" ],
+							    [ "3", "Hộ khẩu", "Hộ khẩu"],
+							    [ "4", "", "Hợp đồng lao động"],
+							    [ "1", "Đơn đề nghị vay vốn", "Đơn đề nghị vay vốn" ],
+							    [ "2", "Chứng minh nhân dân", "Chứng minh nhân dân" ],
+							    [ "3", "Hộ khẩu", "Hộ khẩu"],
+							    [ "4", "", "Hợp đồng lao động"]
+							    
+			
+							];
+							
+								$('#example').DataTable( {
+							        data: dataSet,
+							        columns: [
+							            { title: "#" },
+							            { title: "(TSA) Document Required" },
+							            { title: "(DC) Document Collected" }
+							        ],
+							        "bInfo": false,
+							        "bPaginate": false,
+							        "searching": false,
+							        "scrollY": "150px"
+							    } );
+							</script>
+							<p ></p>
+							<p ></p>
+							<p class="haflBottomRem"> <strong>::: Result</strong></p>
+							
+							<div class="form-check-inline" style="width:30%"></div>
+							<div class="form-check-inline">
+							  <label class="form-check-label">
+							    <input type="radio" class="form-check-input" name="optradio">Approved
+							  </label>
+							</div>
+							
+							<div class="form-check-inline">
+							  <label class="form-check-label">
+							    <input type="radio" class="form-check-input" name="optradio">Cancel
+							  </label>
+							</div>
+							
+				
+				
+							
+							<div >
+						          <label for="usr" class="labelManual">Reason</label>
+						          
+						   
+						          
+						          
+						             <input  class="form-control required easyui-combobox"  id="reason"  name="reason" >
+						             <script>
+								         	$('#reason').combobox({
+								    		    url: $('#PageContext').val() + 'masterdata/reason', 
+								    		    valueField:'code',
+								    		    textField:'codeUtf8',
+								    		    panelHeight:'200px'
+								    		});
+						             </script>
+						          
+						          
+						  
+						          
+						          
+        					</div>
+        					
+        					<div >
+						          <label for="usr" class="labelManual">Reason</label>
+						         <textarea class="form-control" rows="5" id="comment"></textarea>
+        					</div>
+        					
+        					<div>
+						          <br/>
+						          <button id="search" type="button" class="btn btn-primary btn3d" style="margin-top:0px;width: 100%;">Next >></button>
+						          <p></p>
+						          <button id="search" type="button" class="btn btn-primary btn3d" style="margin-top:0px;width: 100%;">Exit</button>
+						      
+						          
+						    </div>
+						
+							
+							
+						</div>
+						
+					
+						
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+
+
+
+	</div>
+	<!--End container-fluid-->
+</body>
+
+</html>

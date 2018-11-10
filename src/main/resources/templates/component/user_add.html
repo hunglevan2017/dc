@@ -1,0 +1,133 @@
+
+
+<!-- Modal edit-->
+
+<div class="modal-dialog">
+
+    <form action="" method="POST" class="form-horizontal">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ADD User</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="cc_code">CC Code:</label>
+                    <div class="col-sm-6">
+
+                        <input  name="cc_code" id="inputUser" class="form-control " required="required" value=""/>
+
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="cc_name">CC Name:</label>
+                    <div class="col-sm-6">
+
+                        <input  name="cc_name" id="inputUser" class="form-control" required="required" value=""/>
+
+                    </div>
+                </div><!--form-group-->
+
+                <!--
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="cc_password">Password:</label>
+                    <div class="col-sm-6">
+
+                        <password path="cc_password" name="cc_password" id="inputUser" class="form-control" required="required" value="${object.cc_password}"/>
+
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="cc_role">CC Role:</label>
+                    <div class="col-sm-6">
+
+                        <select  class="form-control required aA" id="cc_role">
+                   
+                                     <option th:each="obj : ${roles}"
+                           			 th:value="${obj.value_en}"
+                            		 th:utext="${obj.value_vn}"/>
+                  
+                        </select>
+
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="channel">Channel:</label>
+                    <div class="col-sm-6">
+
+                        <select  class="form-control required" id="channel" name="channel">
+                         
+               
+                                    <option th:each="obj : ${channels}"
+                           			 th:value="${obj.value_en}"
+                            		 th:utext="${obj.value_vn}"/>
+                            
+                        </select>
+
+
+
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="province">Province:</label>
+                    <div class="col-sm-6">
+
+                        <input  name="province" id="inputUser" class="form-control" />
+
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="pos_code">Pos Code:</label>
+                    <div class="col-sm-6">
+                        <input  name="pos_code" id="inputUser" class="form-control" />
+                    </div>
+                </div><!--form-group-->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="is_android">Moblie App:</label>
+                    <div class="col-sm-6">
+
+                     
+                        <select  class="form-control required" name="is_android">
+                            <option value="1" test="">Yes</option>
+                            <option value="0" test="">No</option>
+                        </select>
+                    </div>
+                </div><!--form-group-->
+                
+                 <div class="form-group">
+                 	<label class="col-sm-4 control-label" for="is_android">&nbsp;</label>
+                    <label class="col-sm-6 control-label" for="is_android">Thất bại</label>
+                </div><!--form-group-->
+                
+                
+            </div><!--modal-body-->
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success"><i
+                        class="mdi mdi-check mdi-17px"></i> Save
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="mdi mdi-close mdi-17px"></i> Cancel
+                </button>
+            </div><!--modal-footer-->
+            
+            
+        
+            
+            
+            
+            
+            
+        </div><!--model-content-->
+    </form>
+</div>

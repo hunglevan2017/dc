@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+
+<head>
+	<title>Layout</title>
+</head>
+
+<body>
+	<!-- Content -->
+	<div class="container-fluid" layout:fragment="content">
+	
+	 <script th:src="@{/js/jquery.easyui.min.js}"></script>
+	 <link th:href="@{/css/easyui/easyui.css}" rel="stylesheet">
+    <link th:href="@{/css/easyui/icon.css}" rel="stylesheet">
+    <link th:href="@{/css/easyui/demo.css}" rel="stylesheet">
+
+
+		<h4 style="border-bottom: double;"></i>Allocation To DC</h4>
+
+		<div id="divdtTable">
+
+			<!--  Hoursly 01 -->
+			<table class="table table-striped table-bordered table-hover" id="dtTable">
+				<thead>
+
+				</thead>
+
+				<tbody>
+				</tbody>
+
+			</table>
+		</div>
+
+
+		<form id="frmFilter" style="margin-top:15px;height:110px">
+
+			<!-- Row 1 -->
+			<div class="row">
+
+				<div class="col-3">
+
+
+					<div class="card cta cta--featured">
+						<div class="card-block">
+							<strong class="card-title no-margin-top" style="margin: 0px 5px 0px 5px;">Quick Search</strong>
+						</div>
+						<span class="header-line gradient-color-1"></span>
+						<div class="card-block" style="margin-top: 4%;">
+
+
+								<div class="form-check-inline"></div>
+							<div class="form-check-inline">
+							  <label class="form-check-label">
+							    <input type="radio" class="form-check-input" name="optradio">Ward
+							  </label>
+							</div>
+							
+							<div class="form-check-inline">
+							  <label class="form-check-label">
+							    <input type="radio" class="form-check-input" name="optradio">District
+							  </label>
+							</div>
+							
+										
+							<div class="form-check-inline" style="width: 50%;">
+							  <label class="form-check-label">
+							    <input type="radio" class="form-check-input" name="optradio">City
+							  </label>
+							  
+							  <button id="quickSearch" type="button" class="btn btn-primary btn3d" style="margin-left:5%;width: 70%;">Search</button>
+							</div>
+
+
+							<br />
+							
+
+
+						</div>
+					</div>
+					
+
+				</div>
+
+				<div class="col-9">
+
+					<div class="card cta cta--featured">
+						<div class="card-block">
+							<strong class="card-title no-margin-top" style="    margin-bottom: 3px;">Advance Search</strong>
+						</div>
+						<span class="header-line gradient-color-1"></span>
+						<div class="card-block">
+
+							<div class="col-xs-12" style="margin-top: 0.5%;">
+
+								<div id="searchGroup" class="input-group">
+
+									<div class="col-3">
+										<label for="usr" class="labelManual">City</label>
+										 <input id="city" class="easyui-combobox" data-options="
+									        valueField: 'id',
+									        textField: 'name',
+									        url: 'http://localhost:8080/app/api/city',
+									        onSelect: function(rec){
+									            //var url = 'http://localhost:8080/app/api/city/' + rec.id + '/district';
+									            
+									            var url = $('#PageContext').val() + 'app/api/city/' + rec.id + '/district';
+									            $('#district').combobox('clear');
+									            $('#district').combobox('reload', url);
+									        }">
+									</div>
+
+									<div class="col-3">
+										<label for="usr" class="labelManual">District</label>
+					
+										
+										
+										 <input id="district" class="easyui-combobox" data-options="
+									        valueField: 'id',
+									        textField: 'name',
+									        url: 'http://localhost:8080/app/api/city',
+									        onSelect: function(rec){
+									           // var url = 'http://localhost:8080/app/api/district/' + rec.id + '/ward';
+									            var url = $('#PageContext').val() + 'app/api/district/' + rec.id + '/ward';
+									            
+									            $('#ward').combobox('clear');
+									            $('#ward').combobox('reload', url);
+									        }">
+										
+									</div>
+
+									<div class="col-3">
+										<label for="usr" class="labelManual">Ward</label>
+										<input id="ward" class="easyui-combobox" data-options="valueField:'id',textField:'name'">
+									</div>
+									
+									<div class="col-3">
+										
+										<button id="advanceSearch" type="button" class="btn btn-primary btn3d" style="width: 100%;margin-top:25px">Search</button>
+									</div>
+
+
+								</div>
+								
+
+							</div>
+
+
+
+						</div>
+					</div>
+
+				</div>
+
+
+
+
+
+
+
+			</div>
+		</form>
+
+		<div id="divTableDC">
+			<!--  Hoursly 01 -->
+			<table class="table table-striped table-bordered table-hover" id="TableDC">
+				<thead>
+
+				</thead>
+
+				<tbody>
+				</tbody>
+
+			</table>
+		</div>
+
+
+
+
+
+		<script th:inline="javascript">
+			var table;
+			/*<![CDATA[*/
+
+			var Contracts = /*[[${Contracts}]]*/ 'default';
+			console.log(Contracts);
+		
+
+			/*]]>*/
+
+			function loadData() {
+
+
+
+
+
+				resetDivToDefault("divdtTable", "dtTable");
+				var condition = {
+					"start_time": "2018/12/01 00:00:00",
+					"end_time": "2018/12/03 23:59:59",
+					"type_report": 5
+
+				}
+				//  "mData": "No\\.",
+
+				var aoData = [{
+						"mData": "no",
+						"defaultContent": ""
+					},
+					{
+						"mData": null,
+						"defaultContent": ""
+					},
+
+					{
+						"mData": "customer_name",
+						"defaultContent": ""
+					},
+					{
+						"mData": "current_address",
+						"defaultContent": ""
+					},
+					{
+						"mData": "dc_in_change",
+						"defaultContent": ""
+					},
+					{
+						"mData": "status",
+						"defaultContent": ""
+					},
+					{
+						"mData": "id",
+						"defaultContent": ""
+					},
+					{
+						"mData": null,
+						"defaultContent": ""
+					}
+				];
+				/* Begin Ajax */
+
+				/*
+				var title = ["No.", "Content", "PL Normal", "PL Mobile", " PL Pre", "CRC Pre", "QDE Normal", "QDE Mobile", "QDE PL Pre", "QDE CRC Pre"];
+				*/
+
+				var columnDefs = [{
+						"title": "#",
+						"targets": 0,
+						"width": "2%",
+						"className": "text-center"
+
+					},
+					{
+						"targets": 1,
+						'checkboxes': {
+							'selectRow': true
+						}
+					},
+					{
+						"title": "Customer Name",
+						"targets": 2
+					},
+					{
+						"title": "Current Addr",
+						"targets": 3
+					},
+					{
+						"title": "DC In Charge",
+						"targets": 4
+					},
+					{
+						"title": "Status",
+						"targets": 5
+					},
+
+					{
+						"title": "id",
+						"targets": 6,
+						"visible": false,
+						"searchable": false
+					},
+					{
+						"title": "Action",
+						"targets": 7,
+						"className": "text-center",
+						"render": function(data, type, row, meta) {
+							return '<a href="#" data-id=' + row['id'] + ' > <i class="mdi mdi-account-convert mdi-24px"> </i> </a>';
+						}
+
+					}
+				];
+				//  text-right, text-left,text-center
+				//	var token = $("meta[name='_csrf']").attr("content");
+				//  var header = $("meta[name='_csrf_header']").attr("content");
+
+				table = $('#dtTable').dataTable({
+					"data": Contracts,
+					"searching": false,
+					"columnDefs": columnDefs,
+					"aoColumns": aoData,
+					"ordering": false,
+					"bPaginate": false,
+					"pageLength": 50,
+					"scrollX": true,
+					"scrollY": 260,
+					"bInfo": false,
+					"initComplete": function(settings, json) {
+						$("#search").attr("disabled", false);
+						//$("#cusloading").hide();
+					},
+					 select: {
+			                style: 'single'
+			            },
+					"autoWidth": false
+
+
+				}); /*End table*/
+			}
+
+
+
+
+			$("#allocate").click(function() {
+				if (table != null) {
+					var data = table.api().rows().nodes();
+					$.each(data, function(index, value) {
+						//console.log($(this).find('input').prop('checked'));
+						if ($(this).find('input').prop('checked'))
+							console.log(table.api().row(index).data());
+					});
+				} else {
+					alert("Cannot allocate because no data to select");
+				}
+
+			});
+
+			/*Search DC*/
+			function searchDC(isQuick) {
+				resetDivToDefault("divTableDC", "TableDC");
+				var condition = {
+					"start_time": "2018/12/01 00:00:00",
+					"end_time": "2018/12/03 23:59:59",
+					"type_report": 5
+
+				}
+				//  "mData": "No\\.",
+
+				var aoData = [{
+						"mData": "no",
+						"defaultContent": ""
+					},
+					{
+						"mData": "customer_name",
+						"defaultContent": ""
+					},
+					{
+						"mData": "current_address",
+						"defaultContent": ""
+					},
+					{
+						"mData": "dc_in_change",
+						"defaultContent": ""
+					},
+					{
+						"mData": "status",
+						"defaultContent": ""
+					},
+					{
+						"mData": "id",
+						"defaultContent": ""
+					},
+					{
+						"mData": null,
+						"defaultContent": ""
+					}
+				];
+
+				var columnDefs = [{
+						"title": "#",
+						"targets": 0,
+						"width": "2%",
+						"className": "text-center"
+
+					},
+					{
+						"title": "DC",
+						"targets": 1
+					},
+					{
+						"title": "DC Teamlead",
+						"targets": 2
+					},
+					{
+						"title": "Capacity",
+						"targets": 3
+					},
+					{
+						"title": "Route",
+						"targets": 4
+					},
+
+					{
+						"title": "Area",
+						"targets": 5,
+						"visible": false,
+						"searchable": false
+					},
+					{
+						"title": "Action",
+						"targets": 6,
+						"className": "text-center",
+						"render": function(data, type, row, meta) {
+							return '<a href="#" data-id=' + row['id'] + ' > <i class="fa fa-plus" style="font-size:24px"></i> </a>';
+						}
+
+					}
+				];
+
+				table = $('#TableDC').dataTable({
+					"ajax": {
+						"url": $('#PageContext').val() +"app/getContracts",
+						"type": "POST",
+						"data": function(d) {
+							return JSON.stringify(condition);
+
+
+						},
+						"dataSrc": "",
+						"contentType": "application/json; charset=utf-8"
+					},
+					"searching": true,
+					"columnDefs": columnDefs,
+					"aoColumns": aoData,
+					"ordering": false,
+					"bPaginate": false,
+					"pageLength": 50,
+					"scrollX": true,
+					"scrollY": 260,
+					"bInfo": false,
+					"initComplete": function(settings, json) {
+						$("#search").attr("disabled", false);
+						//$("#cusloading").hide();
+					},
+					"autoWidth": false
+
+
+				}); /*End table*/
+
+				if (isQuick) {
+
+				} else {
+
+				}
+			}
+
+			$("#allocate").click(function() {
+				if (table != null) {
+					var data = table.api().rows().nodes();
+					$.each(data, function(index, value) {
+						//console.log($(this).find('input').prop('checked'));
+						if ($(this).find('input').prop('checked'))
+							console.log(table.api().row(index).data());
+					});
+				} else {
+					alert("Cannot allocate because no data to select");
+				}
+
+			});
+
+			$("#quickSearch").click(function() {
+				searchDC(true);
+			});
+
+			$("#advanceSearch").click(function() {
+				searchDC(false);
+			});
+
+
+			loadData();
+			//searchDC(true);
+		</script>
+
+
+
+
+
+
+
+	</div>
+	<!--End container-fluid-->
+</body>
+
+</html>

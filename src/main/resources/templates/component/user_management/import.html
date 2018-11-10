@@ -1,0 +1,57 @@
+
+
+
+<!-- Modal edit-->
+
+<div class="modal-dialog">
+   
+    <form th:action="@{/user/add/}" method="POST" class="form-horizontal" id="form">
+ 		<input type="hidden" id="cc_code" name="cc_code" th:value="${session.loginInfo.username}">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Change Password</h4>
+            </div>
+            <div class="modal-body">
+
+
+                
+                 <div class="form-group">
+                    <label class="col-sm-4 control-label" for="new_password">Select a file to upload</label>
+                    <div class="col-sm-6">
+
+                           <input type="file" name="file" id="file"/>
+
+                    </div>
+                </div><!--form-group-->
+                
+                
+               
+                
+
+            </div><!--modal-body-->
+
+            <div class="modal-footer">
+                <button id="save" type="button" class="btn btn-success"><i
+                        class="mdi mdi-check mdi-17px"></i> Save
+                </button>
+                
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    <i class="mdi mdi-close mdi-17px"></i> Cancel
+                </button>
+            </div><!--modal-footer-->
+        </div><!--model-content-->
+    </form>
+    <script >
+
+    
+	</script>
+</div>
+
+
+
+
+
+

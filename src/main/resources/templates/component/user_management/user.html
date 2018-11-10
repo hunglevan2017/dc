@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout/layout">
+
+<head>
+<title>Layout</title>
+</head>
+
+<body>
+	<!-- Content -->
+	<div class="container-fluid" layout:fragment="content">
+	 <link th:href="@{/css/easyui/easyui.css}" rel="stylesheet">
+    <link th:href="@{/css/easyui/icon.css}" rel="stylesheet">
+    <link th:href="@{/css/easyui/demo.css}" rel="stylesheet">
+
+		<div class="row">
+			<!-- /.row -->
+			<div class="col-sm-12 col-md-12 col-lg-12">
+
+				<ul class="breadcrumb">
+					<li><a href="#">User</a></li>
+					<li><a href="#" th:text="#{usersetting}"> </a></li>
+				</ul>
+
+				<!-- User table -->
+				<div class="panel panel-darkblue">
+					<div class="panel-body">
+
+						<div class="row" id="divTopFrame">
+							<div class="list-group list-group-horizontal btn-group-justified">
+
+								<div class="col-sm-3">
+									<button type="button" th:data-id="@{/user/add/}"
+										class="btn btn-primary btn-adduser">
+										<i class="mdi mdi-account-plus mdi-15px"></i> New
+									</button> 
+								</div>
+
+
+								<div class="col-sm-3">
+									<button type="button" class="btn btn-success btn-secukey"
+										data-toggle="modal" th:data-id="@{/user/security/}">
+										<i class="mdi mdi-key-variant mdi-15px"></i> Add security key
+									</button>
+								</div>
+
+
+							<!-- 
+								<div class="col-sm-3">
+									<button type="button" class="btn btn-success btn-import-excel"
+										data-toggle="modal" th:data-id="@{/user/import/} ">
+										<i class="mdi mdi-file-excel mdi-15px"></i> Import to Excel
+									</button>
+								</div>
+
+
+
+
+								<div class="col-sm-3">
+									<button type="button" class="btn btn-warning btn-excel"
+										data-toggle="modal" th:data-id="@{/user/export/}">
+										<i class="mdi mdi-file-excel mdi-15px"></i> Export to Excel
+									</button>
+								</div>
+								 -->
+
+							</div>
+						</div>
+
+
+
+
+						<!-- Modal Error-->
+
+						<div id="ErrorDiv" class="modal fade" data-backdrop="static"
+							role="dialog" th:if="${ERROR_MESSAGE}">
+							<div class="modal-dialog">
+
+								<!-- Modal content-->
+								<div class="modal-content">
+
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title " style="color: red">ERROR</h4>
+									</div>
+
+									<div class="modal-body">
+										<div class="alert alert-danger">
+											<span th:text="${error_message}"> </span>
+										</div>
+									</div>
+									<!--modal-body-->
+
+
+								</div>
+								<!--model-content-->
+
+							</div>
+						</div>
+						<!--/modal new-->
+
+
+
+
+
+
+						<!-- Modal new-->
+						<div id="TemplateDialog" class="modal fade" data-backdrop="static"
+							role="dialog">
+							
+							
+							
+							
+							</div>
+						<!--/modal new-->
+
+						<div id="importex" class="modal fade" data-backdrop="static"
+							role="dialog"></div>
+						<!--/modal new-->
+
+						
+						<br>
+						<table class="table table-striped table-bordered table-hover "
+							id="TableUser">
+							<thead>
+								<tr>
+
+									<th>CC code</th>
+									<th>CC Name</th>
+									<th>CC Role</th>
+									<th>Channel</th>
+									<th>Province</th>
+									<th>Pos Code</th>
+									<th>Pos Name</th>
+									<th>Blocked</th>
+									<th>Moblie App</th>
+									<th>Security Key</th>
+
+									<th class="text-center">Actions</th>
+								</tr>
+
+
+							</thead>
+							<tbody>
+
+
+							</tbody>
+						</table>
+
+
+					</div>   
+					<!--panel-body-->
+
+					<script type="text/javascript" th:inline="javascript">
+					$(document).ready(function () {
+						
+							var message = [[${message}]];
+							
+							if(message != null )
+							{
+								alert(message);
+							}
+								var data;
+
+								var arrlookupchannel = '[[${arrlookupchannel}]]';
+								if (arrlookupchannel !== '') {
+									data = JSON.parse(arrlookupchannel);
+								}
+
+								var role = [[${session.loginInfo.role}]];
+								var valButton = [];
+								if (role == "admin") {
+									valButton = [{
+										extend: 'csv',
+										filename: "ListUser"
+
+									}, {
+										extend: 'excel',
+										filename: "ListUser"
+
+									},
+									'print'];
+								}
+
+			
+								var table = $('#TableUser')
+									.DataTable({
+										"aaData": data,
+										 fixedHeader: true,
+										  buttons: valButton,
+			                                dom: 'Bfrtip',
+										 
+										"columnDefs": [{
+												width: '10%',
+												orderable: false,
+												"targets": 7,
+												"render": function (
+													data,
+													type,
+													full,
+													meta) {
+													if (data) {
+														return '<span class="label label-success">No</span>'
+													} else {
+														return '<span class="label label-danger">Blocked </span>'
+													}
+												}
+											},
+											{
+												width: '50px',
+												orderable: false,
+												"targets": 8,
+												"render": function (
+													data,
+													type,
+													full,
+													meta) {
+													return data == 1 ? 'Yes' :
+														'No'
+												}
+											},
+
+											{
+												"targets": 10,
+												"render": function (
+													data,
+													type,
+													full,
+													meta) {
+
+													// how can i acccess here column 4?
+													if (true) {
+														var urlTmp = $('#PageContext').val();
+														
+														
+														var edit = '</button>  <button type="button" class="btn btn-primary btn-sm btnEdit" data-toggle="modal" data-id="' + urlTmp + 'user/edit/' + full.cc_code + '" tite="Edit">  ';
+														
+														//var remove = '</button> <button type="button" class="btn btn-danger btn-sm btnDelete" data-toggle="modal" data-id="${pageContext.request.contextPath}/component/usermanagement/usersetting/delete/' + full.cc_code + '"  title="Delete User"> ';
+														
+														var block = '</button>  <button type="button" class="btn btn-danger btn-sm btnBlock" data-toggle="modal" data-id="' + urlTmp + 'user/block/' + full.cc_code + '" tite="Block or Unblock">  ';
+														var resetpassword = '</button>  <button type="button" class="btn btn-warning btn-sm btnReset" data-toggle="modal" data-id="' + urlTmp + 'user/resetPassword/' + full.cc_code + '" tite="Reset password">  ';
+
+														var blockimage = '<i class="mdi mdi-lock-outline mdi-18px"></i>';
+														if (full.is_enable) {
+															blockimage = ' <i class="mdi mdi-lock-open-outline mdi-18px"></i>';
+														}
+
+														return '<div class="btn-group btn-group-sm" role="group"> ' +
+															edit +
+															' <i class="mdi mdi-account-edit mdi-18px"></i>' +
+															// remove + ' <i class="mdi mdi-account-remove mdi-18px"></i>' +
+															block +
+															blockimage +
+															resetpassword +
+															'<i class="mdi mdi-autorenew mdi-18px"></i></button> </div>'
+													} else {
+														return '';
+													}
+												}
+											}
+
+										],
+
+										autoWidth: false,
+
+				
+										language: {
+											sZeroRecords: "Không tìm thấy thông tin",
+											search: '<span>Filter:</span> _INPUT_',
+											lengthMenu: '<span>Show:</span> _MENU_',
+											paginate: {
+												'first': 'First',
+												'last': 'Last',
+												'next': '&rarr;',
+												'previous': '&larr;'
+											}
+										},
+										drawCallback: function () {
+											$(this)
+												.find(
+													'tbody tr')
+												.slice(-3)
+												.find(
+													'.dropdown, .btn-group')
+												.addClass(
+													'dropup');
+										},
+										"bDestroy": true,
+										preDrawCallback: function () {
+											$(this)
+												.find(
+													'tbody tr')
+												.slice(-3)
+												.find(
+													'.dropdown, .btn-group')
+												.removeClass(
+													'dropup');
+										},
+										"aoColumns": [
+											{
+												"mData": "cc_code",
+												"defaultContent": ""
+											},
+											{
+												"mData": "cc_name",
+												"defaultContent": ""
+											},
+											{
+												"mData": "cc_role",
+												"defaultContent": ""
+											},
+											{
+												"mData": "channel",
+												"defaultContent": ""
+											},
+											{
+												"mData": "province",
+												"defaultContent": ""
+											},
+											{
+												"mData": "pos_code",
+												"defaultContent": ""
+											},
+											{
+												"mData": "pos_name",
+												"defaultContent": ""
+											},
+											{
+												"mData": "is_enable",
+												"defaultContent": ""
+											},
+											{
+												"mData": "is_android"
+											},
+											{
+												"mData": "security_key",
+												"defaultContent": ""
+											}
+										]
+									
+									});
+
+								$('.datatable-pagination')
+									.DataTable({
+										pagingType: "simple",
+										language: {
+											paginate: {
+												'next': 'Next &rarr;',
+												'previous': '&larr; Prev'
+											}
+										}
+									});
+
+								$('.datatable-save-state')
+									.DataTable({
+										stateSave: true
+									});
+
+								$('.datatable-basic').DataTable({
+									scrollY: 580,
+								});
+
+								$(
+										'.dataTables_filter input[type=search]')
+									.attr('placeholder',
+										'Lọc thông tin...');
+								
+								 var framedialog = [
+		                                {
+		                                    "frameId":"#TableUser",
+		                                    "button" : ".btnEdit",
+		                                    "dialog"   : "#TemplateDialog"
+		                                },
+		                                {
+		                                    "frameId":"#TableUser",
+		                                    "button" : ".btnBlock",
+		                                    "dialog"   : "#TemplateDialog"
+		                                },
+		                                {
+		                                    "frameId":"#TableUser",
+		                                    "button" : ".btnDelete",
+		                                    "dialog"   : "#TemplateDialog"
+		                                },
+		                                {
+		                                    "frameId":"#TableUser",
+		                                    "button" : ".btnReset",
+		                                    "dialog"   : "#TemplateDialog"
+		                                },
+		                                {
+		                                    "frameId":"#divTopFrame",
+		                                    "button" : ".btn-secukey",
+		                                    "dialog"   : "#TemplateDialog"
+		                                },
+		                                {
+		                                    "frameId":"#divTopFrame",
+		                                    "button" : ".btn-adduser",
+		                                    "dialog"   : "#TemplateDialog"
+		                                },
+		                                {
+		                                    "frameId":"#divTopFrame",
+		                                    "button" : ".btn-excel",
+		                                    "dialog"   : "#TemplateDialog"
+		                                },
+		                                {
+		                                    "frameId":"#divTopFrame",
+		                                    "button" : ".btn-import-excel",
+		                                    "dialog"   : "#importex"
+		                                }
+		                                ];
+
+		                            for(var i = 0; i < framedialog.length; i++) {
+		                                var frameid   = framedialog[i]["frameId"];
+		                                var varButton = framedialog[i]["button"];
+		                                var varDialog = framedialog[i]["dialog"];
+
+
+		                                $(frameid).on("click", varButton, function(){
+		                                    // your code goes here
+		                                    var urlData = $(this).attr('data-id');
+
+		                                    //alert(urlData);
+
+		                                    $.ajax({
+		                                        type: 'GET',
+		                                        url: urlData,
+		                                        beforeSend: function () {
+		                                        },
+		                                        error: function (error) {
+		                                            console.log(error);
+		                                        },
+		                                        success: function (data) {
+		                                            //console.log(data);
+		                                            //alert(data);
+		                                            console.log(data);
+		                                            $(varDialog).html(data);
+		                                            $(varDialog).modal('show');
+		                                        },
+		                                        complete: function () {
+		                                            // alert(1);
+		                                        }
+		                                    });
+
+		                                });
+
+
+		                            }
+
+							});
+					</script>
+				</div>
+				<!-- /panel-->
+
+			</div>
+			<!--/col-->
+
+		</div>
+		<!--/ row -->
+	<script th:src="@{/js/jquery.easyui.min.js}"></script>
+	
+	
+	</div>
+</body>
+
+</html>
